@@ -241,12 +241,12 @@ truffle.world.prototype.sort_sprites=function() {
 // required for sprites that overlap with multiple changing objects
 // so they only get redrawn once
 truffle.world.prototype.add_to_draw_list=function(spr,bbox,draw_list) {
-    draw_list.forEach(function(d) {
-        if (spr.id===d.spr.id) {
-            d.bbox.push(bbox);
-            return draw_list;
-        }
-    });
+    //draw_list.forEach(function(d) {
+    //    if (spr.id===d.spr.id) {
+    //        d.bbox.push(bbox);
+    //        return draw_list;
+    //    }
+    //});
 
     draw_list.push({spr:spr,bbox:[bbox]});
     return draw_list;

@@ -25,10 +25,12 @@ var frames;
 var total_time;
 var update_time;
 var update_frames;
+var canvas;
+var ctx;
 
 truffle.main.init=function(game_create,game_update) {
-    var canvas=document.getElementById('canvas')
-    var ctx=canvas.getContext('2d');
+    canvas=document.getElementById('canvas')
+    ctx=canvas.getContext('2d');
 
     last_time = (new Date()).getTime();
     frames = 0;
@@ -51,8 +53,6 @@ function ipad_emulator(millis)
 }
 
 truffle.main.loop=function(timestamp) {
-    var canvas=document.getElementById('canvas')
-    var ctx=canvas.getContext('2d');
     var now = (new Date()).getTime();
     var delta = now-last_time;
    

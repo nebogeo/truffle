@@ -119,11 +119,11 @@ truffle.canvas_state.prototype.end_scene=function(delta) {
 truffle.canvas_state.prototype.clear_rects=function(bboxes) {
     this.ctx.fillStyle = this.bg_colour;
     var that=this;
-    bboxes.forEach(function(box) {
+/*    bboxes.forEach(function(box) {
         that.ctx.fillRect(~~(box[0]+2),~~(box[1]+2),
                           ~~((box[2]-box[0])-4),
                           ~~((box[3]-box[1])-4)); 
-    });
+    });*/
 }
 
 truffle.canvas_state.prototype.set_clip=function(bboxes) {

@@ -15,6 +15,12 @@
 
 //////////////////////////////////////////////////////////////////////
 
+function build_list(n,f) {
+    var arr=[];
+    for (var i=0; i<n; i++) arr.push(f(i));
+    return arr;
+}
+
 function game(world) {
     this.world=world;
     this.entities=[];
@@ -23,19 +29,20 @@ function game(world) {
     this.world.canvas_state.bg_colour = "#000000";
     
     var that=this;
-    [1,2,3,4,5,6,7,8,9].forEach(function(id) {
+    build_list(50,function(i) {return i;}).forEach(function(id) {
         var t=new truffle.sprite_entity(
             that.world,
-            new truffle.vec3(0,0,0),
+            new truffle.vec2(crndf()*200,
+                             crndf()*200,10),
             "../game/images/blip.png",false);
         t.needs_update=true;
         t.speed=0.5;
-        t.spr.expand_bb=10;
-        t.spr.rotate(rndf());
+        t.spr.expand_bb=0;
+ //       t.spr.rotate(rndf());
         t.every_frame = function (){
             t.spr.rotate(0.02);
             if (rndf()>0.999) {
-                t.move_to(world,rndvec2().mul(100));
+                t.move_to(world,crndvec2().mul(200));
                 new truffle.particles_entity(world,
                                              t.spr.pos, 
                                              "../game/images/particle.png",
@@ -44,16 +51,22 @@ function game(world) {
         };
 
         t.spr.mouse_over(function() {
-            t.move_to(world,rndvec2().mul(100));
-            var p=new truffle.particles_entity(world,
-                                               t.spr.pos, 
-                                               "../game/images/particle.png",
-                                               10,"one-shot");
+            t.move_to(world,crndvec2().mul(200));
+//            var p=new truffle.particles_entity(world,
+//                                               t.spr.pos, 
+//                                               "../game/images/particle.png",
+//                                               10,"one-shot");
             
         });
 
         that.entities.push(t);
     });
+
+    var t=new truffle.sprite_entity(
+        this.world,
+        new truffle.vec3(0,0,-100),
+        "../game/images/bg.png",false);
+
 }
 
 game.prototype.update = function(time,delta) {

@@ -155,7 +155,6 @@ truffle.sprite.prototype.draw=function(ctx) {
     if (!this.ready_to_draw) return;
     truffle.drawable.prototype.draw.call(this,ctx);
     if (this.hidden) return;
-ctx.mozImageSmoothingEnabled = false;
 
     // two render paths
     if (this.complex_transform || this.parent_transform) {        
@@ -177,13 +176,14 @@ ctx.mozImageSmoothingEnabled = false;
         }
 
         ctx.globalAlpha=this.alpha;
-        
+
         ctx.drawImage(this.image,
                       ~~(0.5+(-this.centre.x)),
                       ~~(0.5+(-this.centre.y)));
         ctx.restore();
     }
     else { // simple render path
+
         ctx.drawImage(this.image,
                       ~~(0.5+this.pos.x-this.centre.x),
                       ~~(0.5+this.pos.y-this.centre.y));
